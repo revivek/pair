@@ -2,7 +2,7 @@
 
 Pair is a writing collaborator that reads as you write. No send button, no chat interface, no turns. You write; it thinks alongside you, and when it has something worth saying, a quiet note appears in the margin and then recedes. When it has nothing to add, it stays quiet.
 
-<!-- TODO: add screenshot or GIF here -->
+![Pair demo — writing with margin annotations](pair-demo.gif)
 
 Bring a question you're wrestling with and start writing.
 
