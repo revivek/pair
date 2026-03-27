@@ -10,28 +10,41 @@ Bring a question you're wrestling with and start writing.
 
 ## Try it
 
-You'll need API keys for [OpenAI](https://platform.openai.com/api-keys) and/or [Anthropic](https://console.anthropic.com/) (depending on which models you use), and Node 22+ (`.nvmrc` included).
+You'll need Node 22+ and API keys for the model providers you plan to use. The default configuration uses **both** OpenAI (gut tier) and Anthropic (analyst tier), so you'll need keys for both unless you override the models (see [Configuration](#configuration)).
+
+### Prerequisites
+
+- **Node 22+** — an `.nvmrc` is included, so if you use [nvm](https://github.com/nvm-sh/nvm): `nvm use`
+- API keys for [OpenAI](https://platform.openai.com/api-keys) and/or [Anthropic](https://console.anthropic.com/)
+
+### Install
 
 ```bash
 git clone <repo-url> && cd pair
-npm install
+npm install --legacy-peer-deps
 cp .env.example .env
 ```
 
-Add your keys to `.env`:
+> **Note:** `--legacy-peer-deps` is required because some Tiptap extension packages (bold, italic) have peer dependency version conflicts with `@tiptap/core`. The app works fine despite the mismatch.
+
+Edit `.env` and replace the placeholder values with your real keys:
 
 ```
 OPENAI_API_KEY=sk-proj-...
 ANTHROPIC_API_KEY=sk-ant-...
 ```
 
-Then:
+> **Tip:** If you only have one provider's key, set both `TIER1_MODEL` and `TIER2_MODEL` to models from that provider. For example, to use only Anthropic: `TIER1_MODEL=claude-haiku-4-5-20251001` and `TIER2_MODEL=claude-opus-4-6`. See [Configuration](#configuration) for details.
+
+### Run
 
 ```bash
 npm run dev
 ```
 
 Open `http://localhost:3000`. Start writing.
+
+> If port 3000 is already in use, Vite will automatically pick the next available port and print it in the terminal output.
 
 ## How it works
 
@@ -65,7 +78,9 @@ All configuration lives in `.env` (server-side, never sent to the browser):
 | `TIER1_MODEL` | No | `gpt-5.4-mini` |
 | `TIER2_MODEL` | No | `claude-opus-4-6` |
 
-Both tiers accept any OpenAI or Anthropic model — the provider is inferred from the model name (`claude-*` → Anthropic, otherwise → OpenAI). You only need the API key(s) for the provider(s) you're using.
+Both tiers accept any OpenAI or Anthropic model — the provider is inferred from the model name (`claude-*` → Anthropic, otherwise → OpenAI). You only need the API key(s) for the provider(s) you're actually using.
+
+> **Important:** The default models (`gpt-5.4-mini` and `claude-opus-4-6`) require access to those specific models on your API accounts. If you get API errors at runtime, check that your keys have access to the configured models, or override them with models you do have access to.
 
 ## Architecture
 
@@ -82,6 +97,16 @@ npx tsx benchmark/trailing-text.ts       # incomplete text handling
 npx tsx benchmark/register-detection.ts  # personal vs analytical register
 npx tsx benchmark/sequence.ts            # end-to-end escalation flow
 ```
+
+## Troubleshooting
+
+| Problem | Fix |
+|---|---|
+| `npm install` fails with `ERESOLVE` peer dependency conflict | Use `npm install --legacy-peer-deps` |
+| Dev server starts but API calls fail silently | Check that `.env` has real API keys (not the placeholder values from `.env.example`) |
+| API returns 4xx errors at runtime | Verify your API key has access to the configured model (e.g. `gpt-5.4-mini`). Override with `TIER1_MODEL` / `TIER2_MODEL` if needed |
+| "Open localhost:3000" but nothing loads | Check terminal — Vite may have picked a different port if 3000 was in use |
+| `npm install` warns about Node version | This project requires Node 22+. Run `nvm use` if you have nvm installed |
 
 ## License
 
