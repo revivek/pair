@@ -10,7 +10,7 @@ Bring a question you're wrestling with and start writing.
 
 ## Try it
 
-You'll need Node 18+ and API keys for the model providers you plan to use. The default configuration uses **both** OpenAI (gut tier) and Anthropic (analyst tier), so you'll need keys for both unless you override the models (see [Configuration](#configuration)).
+You'll need Node 18+ and API keys for the model providers you plan to use. The default configuration uses **both** OpenAI (gut tier) and Anthropic (analyst tier), so you'll need keys for both unless you override the models in `.env`.
 
 ### Prerequisites
 
@@ -32,7 +32,7 @@ OPENAI_API_KEY=sk-proj-...
 ANTHROPIC_API_KEY=sk-ant-...
 ```
 
-> **Tip:** If you only have one provider's key, set both `TIER1_MODEL` and `TIER2_MODEL` to models from that provider. For example, to use only Anthropic: `TIER1_MODEL=claude-haiku-4-5-20251001` and `TIER2_MODEL=claude-opus-4-6`. See [Configuration](#configuration) for details.
+> **Tip:** If you only have one provider's key, set both `TIER1_MODEL` and `TIER2_MODEL` to models from that provider. For example, to use only Anthropic: `TIER1_MODEL=claude-haiku-4-5-20251001` and `TIER2_MODEL=claude-opus-4-6`. See `.env.example` for all options.
 
 ### Run
 
@@ -64,25 +64,6 @@ The collaborator adjusts as it reads. It tracks what you've written, what you've
 | `Ctrl+K` | Mute / unmute the collaborator |
 
 `Cmd` works in place of `Ctrl` on macOS.
-
-## Configuration
-
-All configuration lives in `.env` (server-side, never sent to the browser):
-
-| Variable | Required | Default |
-|---|---|---|
-| `OPENAI_API_KEY` | If using any OpenAI model | — |
-| `ANTHROPIC_API_KEY` | If using any Anthropic model | — |
-| `TIER1_MODEL` | No | `gpt-5.4-mini` |
-| `TIER2_MODEL` | No | `claude-opus-4-6` |
-
-Both tiers accept any OpenAI or Anthropic model — the provider is inferred from the model name (`claude-*` → Anthropic, otherwise → OpenAI). You only need the API key(s) for the provider(s) you're actually using.
-
-> **Important:** The default models (`gpt-5.4-mini` and `claude-opus-4-6`) require access to those specific models on your API accounts. If you get API errors at runtime, check that your keys have access to the configured models, or override them with models you do have access to.
-
-## Architecture
-
-Vite + React + TypeScript. Tiptap (ProseMirror) editor. All collaboration timing lives in an orchestrator class — not React — to avoid render/timer race conditions. A Vite dev middleware proxy adds API keys and forwards to OpenAI/Anthropic; keys never reach the browser.
 
 ## Benchmarks
 
