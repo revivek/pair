@@ -21,11 +21,9 @@ You'll need Node 22+ and API keys for the model providers you plan to use. The d
 
 ```bash
 git clone <repo-url> && cd pair
-npm install --legacy-peer-deps
+npm install
 cp .env.example .env
 ```
-
-> **Note:** `--legacy-peer-deps` is required because some Tiptap extension packages (bold, italic) have peer dependency version conflicts with `@tiptap/core`. The app works fine despite the mismatch.
 
 Edit `.env` and replace the placeholder values with your real keys:
 
@@ -102,7 +100,6 @@ npx tsx benchmark/sequence.ts            # end-to-end escalation flow
 
 | Problem | Fix |
 |---|---|
-| `npm install` fails with `ERESOLVE` peer dependency conflict | Use `npm install --legacy-peer-deps` |
 | Dev server starts but API calls fail silently | Check that `.env` has real API keys (not the placeholder values from `.env.example`) |
 | API returns 4xx errors at runtime | Verify your API key has access to the configured model (e.g. `gpt-5.4-mini`). Override with `TIER1_MODEL` / `TIER2_MODEL` if needed |
 | "Open localhost:3000" but nothing loads | Check terminal — Vite may have picked a different port if 3000 was in use |
