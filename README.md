@@ -14,7 +14,7 @@ You'll need Node 22+ and API keys for the model providers you plan to use. The d
 
 ### Prerequisites
 
-- **Node 22+** — an `.nvmrc` is included, so if you use [nvm](https://github.com/nvm-sh/nvm): `nvm use`
+- **Node 18+**
 - API keys for [OpenAI](https://platform.openai.com/api-keys) and/or [Anthropic](https://console.anthropic.com/)
 
 ### Install
@@ -103,7 +103,7 @@ npx tsx benchmark/sequence.ts            # end-to-end escalation flow
 | Dev server starts but API calls fail silently | Check that `.env` has real API keys (not the placeholder values from `.env.example`) |
 | API returns 4xx errors at runtime | Verify your API key has access to the configured model (e.g. `gpt-5.4-mini`). Override with `TIER1_MODEL` / `TIER2_MODEL` if needed |
 | "Open localhost:3000" but nothing loads | Check terminal — Vite may have picked a different port if 3000 was in use |
-| `npm install` warns about Node version | This project requires Node 22+. Run `nvm use` if you have nvm installed |
+| `npm install` warns about Node version | This project requires Node 18+ |
 
 ## License
 
