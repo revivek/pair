@@ -20,7 +20,7 @@ You'll need Node 18+ and API keys for the model providers you plan to use. The d
 ### Install
 
 ```bash
-git clone <repo-url> && cd pair
+git clone https://github.com/revivek/pair.git && cd pair
 npm install
 cp .env.example .env
 ```
