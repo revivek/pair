@@ -10,7 +10,7 @@ Bring a question you're wrestling with and start writing.
 
 ## Try it
 
-You'll need Node 22+ and API keys for the model providers you plan to use. The default configuration uses **both** OpenAI (gut tier) and Anthropic (analyst tier), so you'll need keys for both unless you override the models (see [Configuration](#configuration)).
+You'll need Node 18+ and API keys for the model providers you plan to use. The default configuration uses **both** OpenAI (gut tier) and Anthropic (analyst tier), so you'll need keys for both unless you override the models (see [Configuration](#configuration)).
 
 ### Prerequisites
 
@@ -89,12 +89,16 @@ Vite + React + TypeScript. Tiptap (ProseMirror) editor. All collaboration timing
 Prompt quality is benchmark-driven. We test tone, register detection, escalation decisions, and the full gut-to-analyst flow against sample documents.
 
 ```bash
-npm run benchmark                        # gut prompt evaluation
-npx tsx benchmark/tone-benchmark.ts      # tone and voice
-npx tsx benchmark/trailing-text.ts       # incomplete text handling
-npx tsx benchmark/register-detection.ts  # personal vs analytical register
-npx tsx benchmark/sequence.ts            # end-to-end escalation flow
+npm run benchmark
 ```
+
+This runs all five benchmark suites: gut prompt evaluation, tone and voice, incomplete text handling, register detection, and end-to-end escalation flow.
+
+## Setup with Claude Code
+
+If you have [Claude Code](https://claude.ai/code) installed, you can paste this prompt to set up the project:
+
+> Clone https://github.com/revivek/pair, install dependencies, copy .env.example to .env, ask me for my API keys, add them to .env, and run `npm run dev`.
 
 ## Troubleshooting
 
