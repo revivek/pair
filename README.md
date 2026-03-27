@@ -1,10 +1,10 @@
 # Pair
 
-Pair is a writing collaborator that reads as you write. No send button, no chat interface, no turns. You write; it thinks alongside you, and when it has something worth saying, a quiet note appears in the margin — then recedes. When it has nothing to add, it stays quiet. The silence is intentional.
+Pair is a writing collaborator that reads as you write. No send button, no chat interface, no turns. You write; it thinks alongside you, and when it has something worth saying, a quiet note appears in the margin and then recedes. When it has nothing to add, it stays quiet.
 
 <!-- TODO: add screenshot or GIF here -->
 
-Bring a question you're wrestling with. Start writing. Pause for a couple of seconds.
+Bring a question you're wrestling with and start writing.
 
 > This is a research prototype, not a maintained project. It works, it's fun to write with, and the code is yours to learn from or build on.
 
