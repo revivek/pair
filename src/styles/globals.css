@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg: #faf8f5;
+    --bg-thinking: #f8f6f1;
+    --bg-raised: #f0ede8;
+    --border: #e0dcd5;
+    --border-subtle: #e8e5df;
+    --text: #2c2a25;
+    --text-dim: #7a756b;
+    --text-ghost: #b0aa9e;
+    --accent: #9a7b2e;
+    --accent-dim: #b8963e;
+
+    /* Tier colors */
+    --tier-gut-bg: rgba(140, 130, 110, 0.06);
+    --tier-gut-text: #7a756b;
+    --tier-gut-border: rgba(140, 130, 110, 0.3);
+    --tier-gut-glow: rgba(140, 130, 110, 0.25);
+
+    --tier-analyst-bg: rgba(160, 140, 50, 0.06);
+    --tier-analyst-text: #8a7a30;
+    --tier-analyst-border: rgba(160, 140, 50, 0.35);
+    --tier-analyst-glow: rgba(160, 140, 50, 0.3);
+
+    --error-text: #b07060;
+
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  /* Hide scrollbar — maintain intimacy */
+  html {
+    scrollbar-width: none;
+  }
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Editor column — offset left to give margin notes room */
+  .editor-column {
+    width: 90%;
+    max-width: 790px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (min-width: 1100px) {
+    .editor-column {
+      max-width: 836px;
+      margin-left: calc(50% - 520px);
+      margin-right: auto;
+    }
+  }
+
+  /* Narrow/mobile editor — full width, centered */
+  .editor-narrow {
+    width: 92%;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Tiptap editor styles */
+  .tiptap {
+    outline: none;
+    font-family: "Newsreader", serif;
+    font-size: 22px;
+    font-weight: 400;
+    font-optical-sizing: auto;
+    text-rendering: optimizeLegibility;
+    line-height: 1.85;
+    letter-spacing: normal;
+    color: var(--text);
+    caret-color: var(--accent);
+    min-height: 100%;
+  }
+
+  .tiptap p {
+    margin-bottom: 1em;
+  }
+
+  .tiptap p:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: var(--text-ghost);
+    pointer-events: none;
+    height: 0;
+    font-style: italic;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .tiptap p.is-editor-empty:first-child::before {
+    opacity: 1;
+  }
+
+  /* Selection */
+  .tiptap ::selection {
+    background: rgba(154, 123, 46, 0.15);
+  }
+
+}
+
+
+/* Dual-frequency breathing on glow — never exactly repeats */
+.glow-breathe {
+  animation: glow-wave-a 4.7s ease-in-out infinite, glow-wave-b 7.3s ease-in-out infinite;
+}
+
+@keyframes glow-wave-a {
+  0%, 100% { filter: brightness(0.95); }
+  50% { filter: brightness(1.05); }
+}
+
+@keyframes glow-wave-b {
+  0%, 100% { filter: brightness(0.97); }
+  50% { filter: brightness(1.03); }
+}
+
+
+
+/* Override ProseMirror's default ligature disabling — doubled for specificity */
+.ProseMirror.ProseMirror {
+  font-variant-ligatures: common-ligatures;
+  font-feature-settings: "liga" 1, "clig" 1;
+}
