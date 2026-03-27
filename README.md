@@ -4,7 +4,7 @@ Pair is a writing collaborator that reads as you write. No send button, no chat 
 
 ![Pair demo — writing with margin annotations](pair-demo.gif)
 
-Bring a question you're wrestling with and start writing.
+Bring a question you're wrestling with and start writing. [Blogpost](https://revivek.bearblog.dev/no-send-buttons).
 
 > This is a research prototype, not a maintained project. It works, it's fun to write with, and the code is yours to learn from or build on.
 
